@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pradeep Puri Goswami — Game Developer & Writer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #07071a;
+            --bg2: #0d0d27;
+            --card: #111132;
+            --card2: #16163c;
+            --cyan: #00d4ff;
+            --purple: #8b5cf6;
+            --orange: #f97316;
+            --green: #10b981;
+            --text: #e2e8f0;
+            --muted: #94a3b8;
+            --border: rgba(0, 212, 255, 0.12);
+            --glow: rgba(0, 212, 255, 0.15);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(7,7,26,0.85); backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-logo { font-family: 'Orbitron', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--cyan); text-decoration: none; letter-spacing: 0.1em; }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--cyan); }
+        .nav-toggle { display: none; background: none; border: none; color: var(--cyan); font-size: 1.4rem; cursor: pointer; }
+
+        /* HERO */
+        #hero {
+            position: relative; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden;
+            background: url('images/bg-hero.jpg') center/cover no-repeat;
+        }
+        #hero::before {
+            content: ''; position: absolute; inset: 0; z-index: 0;
+            background: linear-gradient(135deg, rgba(7,7,26,0.92) 0%, rgba(7,7,26,0.78) 50%, rgba(13,13,39,0.92) 100%);
+        }
+        #particles { position: absolute; inset: 0; z-index: 1; }
+        .hero-content { position: relative; text-align: center; z-index: 2; padding: 1rem; }
+        .hero-tag {
+            display: inline-block; background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3);
+            color: var(--cyan); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em;
+            padding: 0.4rem 1.2rem; border-radius: 50px; margin-bottom: 1.5rem; text-transform: uppercase;
+        }
+        .hero-name {
+            font-family: 'Orbitron', sans-serif; font-size: clamp(2.4rem, 6vw, 5rem);
+            font-weight: 900; line-height: 1.1; margin-bottom: 1rem;
+            color: #ffffff;
+            background: linear-gradient(135deg, #ffffff 0%, #00d4ff 50%, #8b5cf6 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-sub { font-size: clamp(0.95rem, 2.5vw, 1.3rem); color: var(--muted); margin-bottom: 0.5rem; }
+        .hero-typewriter { font-size: clamp(0.9rem, 2vw, 1.1rem); color: var(--cyan); font-weight: 500; margin-bottom: 2.5rem; min-height: 1.8rem; }
+        .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.8rem 1.8rem; border-radius: 8px; text-decoration: none;
+            font-size: 0.9rem; font-weight: 600; transition: all 0.3s; cursor: pointer; border: none;
+        }
+        .btn-primary { background: var(--cyan); color: #07071a; }
+        .btn-primary:hover { background: #33dcff; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,212,255,0.35); }
+        .btn-outline { background: transparent; color: var(--cyan); border: 1px solid var(--cyan); }
+        .btn-outline:hover { background: rgba(0,212,255,0.1); transform: translateY(-2px); }
+        .btn-ghost { background: transparent; color: var(--muted); border: 1px solid rgba(148,163,184,0.3); }
+        .btn-ghost:hover { color: var(--text); border-color: var(--muted); transform: translateY(-2px); }
+
+        /* SECTIONS */
+        section { padding: 6rem 2rem; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-tag { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 0.75rem; }
+        .section-title { font-family: 'Orbitron', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700; }
+        .section-line { width: 60px; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--purple)); margin: 1.2rem auto 0; border-radius: 3px; }
+
+        /* ABOUT */
+        #about {
+            position: relative;
+            background: url('images/bg-about.jpg') center/cover no-repeat fixed;
+        }
+        #about::before {
+            content: ''; position: absolute; inset: 0; z-index: 0;
+            background: rgba(10,10,32,0.91);
+        }
+        #about .container { position: relative; z-index: 1; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .about-text h3 { font-family: 'Orbitron', sans-serif; font-size: 1.4rem; color: var(--cyan); margin-bottom: 1.2rem; }
+        .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.95rem; }
+        .about-text p span { color: var(--text); font-weight: 600; }
+        .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+        .stat-card {
+            background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+            padding: 1.5rem; text-align: center; transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px var(--glow); border-color: rgba(0,212,255,0.3); }
+        .stat-number { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; font-weight: 900; color: var(--cyan); line-height: 1; margin-bottom: 0.5rem; }
+        .stat-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+        /* SKILLS */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .skill-category {
+            background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+            padding: 1.8rem; transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .skill-category:hover { transform: translateY(-4px); box-shadow: 0 8px 30px var(--glow); border-color: rgba(0,212,255,0.25); }
+        .skill-cat-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.2rem; }
+        .skill-icon { font-size: 1.5rem; }
+        .skill-cat-title { font-family: 'Orbitron', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.1em; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-tag { background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2); color: var(--text); font-size: 0.8rem; padding: 0.35rem 0.8rem; border-radius: 6px; font-weight: 500; }
+        .skill-tag.purple { background: rgba(139,92,246,0.08); border-color: rgba(139,92,246,0.25); }
+        .skill-tag.orange { background: rgba(249,115,22,0.08); border-color: rgba(249,115,22,0.25); }
+        .skill-tag.green { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.25); }
+
+        /* PROJECTS */
+        #projects {
+            position: relative;
+            background: url('images/bg-projects.jpg') center/cover no-repeat fixed;
+        }
+        #projects::before {
+            content: ''; position: absolute; inset: 0; z-index: 0;
+            background: rgba(7,7,26,0.90);
+        }
+        #projects .container { position: relative; z-index: 1; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.8rem; }
+        .project-card {
+            background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+            overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; display: flex; flex-direction: column;
+        }
+        .project-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px var(--glow); border-color: rgba(0,212,255,0.3); }
+        .project-header { padding: 1.8rem 1.8rem 0; }
+        .project-badges { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
+        .badge { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.65rem; border-radius: 4px; }
+        .badge-live { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+        .badge-multi { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
+        .badge-3d { background: rgba(249,115,22,0.15); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); }
+        .badge-store { background: rgba(0,212,255,0.1); color: var(--cyan); border: 1px solid rgba(0,212,255,0.25); }
+        .project-title { font-family: 'Orbitron', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 1.2rem; }
+        .project-body { padding: 0 1.8rem; flex: 1; }
+        .ps-item { margin-bottom: 0.9rem; }
+        .ps-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--cyan); margin-bottom: 0.25rem; }
+        .ps-text { font-size: 0.87rem; color: var(--muted); line-height: 1.6; }
+        .ps-text strong { color: var(--text); }
+        .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 1.2rem 0; }
+        .tech-tag { font-size: 0.72rem; background: var(--card2); color: var(--muted); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06); }
+        .project-footer { padding: 1.2rem 1.8rem 1.8rem; border-top: 1px solid rgba(255,255,255,0.05); display: flex; gap: 1rem; flex-wrap: wrap; }
+        .project-link { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.82rem; font-weight: 600; color: var(--cyan); text-decoration: none; transition: color 0.2s; }
+        .project-link:hover { color: #fff; }
+        .project-link.muted { color: var(--muted); }
+        .project-link.muted:hover { color: var(--text); }
+
+        /* WRITING */
+        .writing-intro { max-width: 680px; margin: 0 auto 3rem; text-align: center; color: var(--muted); line-height: 1.8; font-size: 0.95rem; }
+        .writing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+        .writing-card {
+            background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--purple);
+            border-radius: 16px; padding: 2rem; transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .writing-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(139,92,246,0.15); border-color: rgba(139,92,246,0.4); }
+        .writing-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .writing-title { font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.7rem; }
+        .writing-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.7; }
+
+        /* EDUCATION */
+        #education { background: var(--bg2); }
+        .edu-timeline { max-width: 680px; margin: 0 auto; position: relative; }
+        .edu-timeline::before { content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, var(--cyan), var(--purple)); }
+        .edu-item { display: flex; gap: 2rem; margin-bottom: 2.5rem; position: relative; }
+        .edu-dot { width: 50px; height: 50px; background: var(--card); border: 2px solid var(--cyan); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; z-index: 1; }
+        .edu-content { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem 1.5rem; flex: 1; }
+        .edu-degree { font-family: 'Orbitron', sans-serif; font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+        .edu-uni { font-size: 0.84rem; color: var(--muted); margin-bottom: 0.5rem; }
+        .edu-meta { display: flex; gap: 1rem; font-size: 0.8rem; }
+        .edu-year { color: var(--cyan); font-weight: 600; }
+        .edu-score { color: var(--green); font-weight: 600; }
+
+        /* CONTACT */
+        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+        .contact-info h3 { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: var(--cyan); margin-bottom: 1rem; }
+        .contact-info p { color: var(--muted); line-height: 1.8; font-size: 0.93rem; margin-bottom: 2rem; }
+        .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+        .contact-link { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; background: var(--card); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; transition: all 0.3s; }
+        .contact-link:hover { border-color: rgba(0,212,255,0.35); transform: translateX(4px); box-shadow: 0 4px 20px var(--glow); }
+        .contact-link-icon { font-size: 1.3rem; width: 36px; text-align: center; }
+        .cl-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+        .cl-value { font-size: 0.88rem; color: var(--text); font-weight: 500; }
+        .social-row { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+        .social-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.2rem; background: var(--card); border: 1px solid var(--border); border-radius: 8px; text-decoration: none; color: var(--muted); font-size: 0.85rem; font-weight: 500; transition: all 0.3s; }
+        .social-btn:hover { color: var(--cyan); border-color: rgba(0,212,255,0.35); }
+
+        /* CONTACT FORM */
+        .contact-form-box { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem; }
+        .contact-form-box h3 { font-family: 'Orbitron', sans-serif; font-size: 0.95rem; color: var(--cyan); margin-bottom: 1.5rem; }
+        .form-field { margin-bottom: 1rem; }
+        .form-field input, .form-field textarea {
+            width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+            padding: 0.85rem 1rem; color: var(--text); font-size: 0.9rem; outline: none;
+            font-family: inherit; transition: border-color 0.3s; resize: vertical;
+        }
+        .form-field input:focus, .form-field textarea:focus { border-color: rgba(0,212,255,0.4); }
+
+        /* FOOTER */
+        footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 2rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
+
+        /* ANIMATIONS — content always visible; animation plays when JS adds .animated class */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { opacity: 1; }
+        .fade-in.animated { animation: fadeUp 0.65s ease forwards; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: rgba(7,7,26,0.97); padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid var(--border); }
+            .nav-toggle { display: block; }
+            .about-grid, .contact-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
+            section { padding: 4rem 1.2rem; }
+            .hero-cta { flex-direction: column; align-items: center; }
+            .edu-timeline::before { left: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="#hero" class="nav-logo">
+        <img src="images/logo.png" alt="Puri Jii" height="40" style="vertical-align:middle;margin-right:0.5rem;border-radius:6px;" onerror="this.style.display='none'">
+        <span>PPG.</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+        <li><a href="#about" onclick="closeNav()">About</a></li>
+        <li><a href="#skills" onclick="closeNav()">Skills</a></li>
+        <li><a href="#projects" onclick="closeNav()">Projects</a></li>
+        <li><a href="#writing" onclick="closeNav()">Writing</a></li>
+        <li><a href="#contact" onclick="closeNav()">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" onclick="toggleNav()">☰</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+    <canvas id="particles"></canvas>
+    <div class="hero-content">
+        <img src="images/logo.png" alt="Puri Jii Logo"
+             style="width:100px;height:100px;object-fit:contain;border-radius:50%;border:2px solid rgba(0,212,255,0.4);box-shadow:0 0 30px rgba(0,212,255,0.25);margin-bottom:1.2rem;display:block;margin-left:auto;margin-right:auto;"
+             onerror="this.style.display='none'">
+        <div class="hero-tag">Available for Work &bull; Jaipur, India</div>
+        <h1 class="hero-name">Pradeep Puri<br>Goswami</h1>
+        <p class="hero-sub">Unity 3D/2D Game Developer &amp; Writer</p>
+        <p class="hero-typewriter" id="typewriter"></p>
+        <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary">View Projects ↓</a>
+            <a href="#contact" class="btn btn-outline">Get in Touch</a>
+            <a href="Pradeep_Puri_Goswami_CV.pdf" download class="btn btn-ghost">Download CV</a>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">Who Am I</div>
+            <h2 class="section-title">About Me</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="about-grid">
+            <div class="about-text fade-in">
+                <h3>Game Developer. Story Creator.</h3>
+                <p>I'm a <span>result-driven Unity 3D/2D Game Developer</span> with 4+ years of full-time experience designing, building, and shipping commercial games across <span>Android, iOS, Web, Desktop, and AR/VR</span> platforms.</p>
+                <p>Currently at <span>KPIS Pvt. Ltd., Jaipur</span>, I lead development of live multiplayer titles — real-money Ludo, Teen Patti, Rummy, and more — played by real users, backed by real backends.</p>
+                <p>Beyond code, I'm a <span>storyteller at heart</span>. I write stories, design characters, and craft worlds — because the best games are built on compelling narratives.</p>
+                <div style="margin-top:1.5rem">
+                    <a href="#contact" class="btn btn-primary" style="font-size:0.85rem">Let's Build Something →</a>
+                </div>
+            </div>
+            <div class="about-stats fade-in">
+                <div class="stat-card">
+                    <div class="stat-number">4+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">12+</div>
+                    <div class="stat-label">Games Shipped</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Platforms Deployed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8.97</div>
+                    <div class="stat-label">MCA SGPA / 10</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">Technical Arsenal</div>
+            <h2 class="section-title">Skills</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-category fade-in">
+                <div class="skill-cat-header"><span class="skill-icon">🎮</span><span class="skill-cat-title">Game Engine</span></div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Unity 3D</span><span class="skill-tag">Unity 2D</span>
+                    <span class="skill-tag">Shader Graph</span><span class="skill-tag">Animator / Mecanim</span>
+                    <span class="skill-tag">Particle Systems</span><span class="skill-tag">Addressables</span>
+                    <span class="skill-tag">Unity Profiler</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <div class="skill-cat-header"><span class="skill-icon">💻</span><span class="skill-cat-title">Languages</span></div>
+                <div class="skill-tags">
+                    <span class="skill-tag">C#</span><span class="skill-tag">C++</span>
+                    <span class="skill-tag">Java</span><span class="skill-tag">Python</span>
+                    <span class="skill-tag">JavaScript</span><span class="skill-tag">HTML / CSS</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <div class="skill-cat-header"><span class="skill-icon">🌐</span><span class="skill-cat-title">Multiplayer & Networking</span></div>
+                <div class="skill-tags">
+                    <span class="skill-tag purple">Photon PUN</span><span class="skill-tag purple">Mirror</span>
+                    <span class="skill-tag purple">Socket.IO</span><span class="skill-tag purple">REST APIs</span>
+                    <span class="skill-tag purple">Firebase</span><span class="skill-tag purple">PHP / Java API</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <div class="skill-cat-header"><span class="skill-icon">📱</span><span class="skill-cat-title">AR / VR</span></div>
+                <div class="skill-tags">
+                    <span class="skill-tag orange">AR Foundation</span><span class="skill-tag orange">ARCore</span>
+                    <span class="skill-tag orange">ARKit</span><span class="skill-tag orange">VR Mobile / PC</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <div class="skill-cat-header"><span class="skill-icon">💰</span><span class="skill-cat-title">Monetization & Analytics</span></div>
+                <div class="skill-tags">
+                    <span class="skill-tag green">AdMob</span><span class="skill-tag green">Unity Ads</span>
+                    <span class="skill-tag green">IAP</span><span class="skill-tag green">Firebase Analytics</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <div class="skill-cat-header"><span class="skill-icon">🛠️</span><span class="skill-cat-title">Tools & Platforms</span></div>
+                <div class="skill-tags">
+                    <span class="skill-tag">Git / GitHub</span><span class="skill-tag">Android Studio</span>
+                    <span class="skill-tag">Visual Studio</span><span class="skill-tag">Blender</span>
+                    <span class="skill-tag">Photoshop</span><span class="skill-tag">CorelDraw</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">What I've Built</div>
+            <h2 class="section-title">Key Projects</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="projects-grid">
+
+            <!-- Teen Patti -->
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-badges">
+                        <span class="badge badge-live">Live</span>
+                        <span class="badge badge-3d">3D</span>
+                        <span class="badge badge-multi">Multiplayer</span>
+                    </div>
+                    <div class="project-title">Unique Teen Patti</div>
+                </div>
+                <div class="project-body">
+                    <div class="ps-item">
+                        <div class="ps-label">Context</div>
+                        <div class="ps-text">Real-money 3D multiplayer Teen Patti card game for Android and Web.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">Challenge</div>
+                        <div class="ps-text">Delivering <strong>lag-free real-time multiplayer</strong> with secure wallet transactions and immersive 3D card animations on mobile.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">My Role</div>
+                        <div class="ps-text">Lead developer — full Unity architecture, socket networking, wallet integration, and 3D animations.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">Outcome</div>
+                        <div class="ps-text"><strong>Live product</strong> with active players, real-money wallet, and REST + Socket backend.</div>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Unity 3D</span><span class="tech-tag">C#</span>
+                        <span class="tech-tag">Socket.IO</span><span class="tech-tag">REST API</span><span class="tech-tag">Firebase</span>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <span class="project-link muted">▶ Demo on Drive</span>
+                </div>
+            </div>
+
+            <!-- Try Players Ludo -->
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-badges">
+                        <span class="badge badge-live">Live</span>
+                        <span class="badge badge-multi">Real Money</span>
+                    </div>
+                    <div class="project-title">Try Players — Ludo</div>
+                </div>
+                <div class="project-body">
+                    <div class="ps-item">
+                        <div class="ps-label">Context</div>
+                        <div class="ps-text">Real-money competitive Ludo platform with live opponents hosted at tryplayers.com.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">Challenge</div>
+                        <div class="ps-text">Building <strong>cheat-proof real-time matchmaking</strong> with room creation and synchronized live moves across players.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">My Role</div>
+                        <div class="ps-text">Unity gameplay engineer — dice physics, room system, socket sync, and cross-platform UI/UX.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">Outcome</div>
+                        <div class="ps-text"><strong>Live at tryplayers.com</strong> — smooth 60fps gameplay with real-money stakes and end-to-end socket integration.</div>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Unity 2D</span><span class="tech-tag">C#</span>
+                        <span class="tech-tag">Socket.IO</span><span class="tech-tag">WebGL</span>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <a href="https://tryplayers.com" target="_blank" class="project-link">↗ tryplayers.com</a>
+                </div>
+            </div>
+
+            <!-- Rummy League -->
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-badges">
+                        <span class="badge badge-live">Live</span>
+                        <span class="badge badge-multi">Multiplayer</span>
+                    </div>
+                    <div class="project-title">Rummy League</div>
+                </div>
+                <div class="project-body">
+                    <div class="ps-item">
+                        <div class="ps-label">Context</div>
+                        <div class="ps-text">13-card Indian Rummy with multiplayer rooms, secure transactions, and fast-paced gameplay.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">Challenge</div>
+                        <div class="ps-text">Implementing <strong>complex Rummy game logic</strong> (declare, meld, sequence validation) with real-time sync and secure real-money flow.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">My Role</div>
+                        <div class="ps-text">Core game logic, REST + Socket API integration, card UI animations, and matchmaking system.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">Outcome</div>
+                        <div class="ps-text"><strong>Live game</strong> with secure transactions and smooth real-time multiplayer experience.</div>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Unity 2D</span><span class="tech-tag">C#</span>
+                        <span class="tech-tag">REST API</span><span class="tech-tag">Socket.IO</span><span class="tech-tag">Firebase</span>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <a href="https://api.leaugeofmangoes.com" target="_blank" class="project-link">↗ Live Link</a>
+                </div>
+            </div>
+
+            <!-- Amakhadi Games -->
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-badges">
+                        <span class="badge badge-store">Play Store</span>
+                        <span class="badge badge-live">Published</span>
+                    </div>
+                    <div class="project-title">Amakhadi Games</div>
+                </div>
+                <div class="project-body">
+                    <div class="ps-item">
+                        <div class="ps-label">Context</div>
+                        <div class="ps-text">Published Android game on Google Play Store targeting a global audience.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">Challenge</div>
+                        <div class="ps-text">Optimizing <strong>performance on low-end Android devices</strong> while delivering smooth 60fps animations and polished UI.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">My Role</div>
+                        <div class="ps-text">Solo Unity developer — game design, development, optimization, and Play Store submission.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">Outcome</div>
+                        <div class="ps-text"><strong>Live on Google Play Store</strong> — optimized build size, smooth performance on budget devices.</div>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Unity 3D</span><span class="tech-tag">C#</span>
+                        <span class="tech-tag">AdMob</span><span class="tech-tag">Android</span>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <a href="https://play.google.com/store/apps/details?id=com.amakhadi.games" target="_blank" class="project-link">↗ Google Play</a>
+                </div>
+            </div>
+
+            <!-- 3D Shooter -->
+            <div class="project-card fade-in">
+                <div class="project-header">
+                    <div class="project-badges">
+                        <span class="badge badge-3d">3D</span>
+                        <span class="badge badge-store">Multi-Platform</span>
+                    </div>
+                    <div class="project-title">3D Shooter Game</div>
+                </div>
+                <div class="project-body">
+                    <div class="ps-item">
+                        <div class="ps-label">Context</div>
+                        <div class="ps-text">Full-featured 3D shooter published across PC, Web, and Android — built end-to-end in Unity.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">Challenge</div>
+                        <div class="ps-text">Creating <strong>convincing enemy AI, custom physics, and Shader Graph visuals</strong> that run well on both high-end PC and mobile simultaneously.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">My Role</div>
+                        <div class="ps-text">Full development — AI behavior, custom physics, Shader Graph effects, dynamic lighting, and cross-platform builds.</div>
+                    </div>
+                    <div class="ps-item">
+                        <div class="ps-label">Outcome</div>
+                        <div class="ps-text"><strong>Published on itch.io, Simmer.io &amp; Play Store</strong> — showcases advanced Unity 3D capabilities.</div>
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-tag">Unity 3D</span><span class="tech-tag">Shader Graph</span>
+                        <span class="tech-tag">C#</span><span class="tech-tag">AI / NavMesh</span><span class="tech-tag">WebGL</span>
+                    </div>
+                </div>
+                <div class="project-footer">
+                    <a href="https://itch.io/profile/purisahib" target="_blank" class="project-link">↗ itch.io</a>
+                    <a href="https://simmer.io/@purisahib" target="_blank" class="project-link muted">↗ Simmer.io</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- WRITING -->
+<section id="writing">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">The Other Side</div>
+            <h2 class="section-title">Stories &amp; Songs</h2>
+            <div class="section-line"></div>
+        </div>
+        <p class="writing-intro">
+            Great games are built on great stories — and great stories deserve great music.
+            Beyond code, I write fiction, craft audio dramas, and compose original songs.
+            Words and melodies are my second language.
+        </p>
+        <div class="writing-grid">
+            <div class="writing-card fade-in">
+                <div class="writing-icon">📖</div>
+                <div class="writing-title">Narrative Game Design</div>
+                <div class="writing-desc">Every game I build carries a story — from the lore behind casino animations to the character moments that make multiplayer memorable. I design with narrative intent.</div>
+            </div>
+            <div class="writing-card fade-in">
+                <div class="writing-icon">🎙️</div>
+                <div class="writing-title">The King Maker</div>
+                <div class="writing-desc" style="margin-bottom:1.2rem">A long-form audio story rooted in power, politics, and the human will to rule. Live on Pocket FM — where storytelling meets sound.</div>
+                <a href="https://pocketfm.com/show/the-king-maker/8db4c9f53c0cbf186de45751a84b1ab0bad9fca9" target="_blank"
+                   style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.4);color:#a78bfa;padding:0.5rem 1rem;border-radius:8px;text-decoration:none;font-size:0.82rem;font-weight:600;transition:all 0.3s;"
+                   onmouseover="this.style.background='rgba(139,92,246,0.28)'" onmouseout="this.style.background='rgba(139,92,246,0.15)'">
+                    🎧 Listen on Pocket FM ↗
+                </a>
+            </div>
+            <div class="writing-card fade-in" style="border-left-color:#f97316">
+                <div class="writing-icon">🎵</div>
+                <div class="writing-title">Song Writing</div>
+                <div class="writing-desc" style="margin-bottom:1.2rem">Original songs — lyrics, melody, and emotion crafted from scratch. Compositions that tell stories in three minutes. Listen on Suno.</div>
+                <a href="https://suno.com/@purijii" target="_blank"
+                   style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(249,115,22,0.12);border:1px solid rgba(249,115,22,0.4);color:#fb923c;padding:0.5rem 1rem;border-radius:8px;text-decoration:none;font-size:0.82rem;font-weight:600;transition:all 0.3s;"
+                   onmouseover="this.style.background='rgba(249,115,22,0.25)'" onmouseout="this.style.background='rgba(249,115,22,0.12)'">
+                    🎵 Listen on Suno ↗
+                </a>
+            </div>
+            <div class="writing-card fade-in">
+                <div class="writing-icon">🌍</div>
+                <div class="writing-title">World Building</div>
+                <div class="writing-desc">Whether it's a game level or a story setting, I love building worlds with internal logic — places that feel lived-in, with rules, history, and texture that players can feel.</div>
+            </div>
+        </div>
+
+        <!-- FEATURED SONG -->
+        <div class="fade-in" style="margin-top:3rem">
+            <div style="text-align:center;margin-bottom:1.5rem">
+                <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#fb923c">Featured Song</span>
+                <h3 style="font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:700;color:#f1f5f9;margin-top:0.5rem">Mari Saheba &nbsp;<span style="font-weight:400;color:#94a3b8;font-family:'Inter',sans-serif;font-size:1rem">मेरी साहिबा</span></h3>
+            </div>
+            <a href="https://www.youtube.com/watch?v=Td9xu1eKD_A" target="_blank"
+               style="display:block;max-width:760px;margin:0 auto;border-radius:16px;overflow:hidden;border:1px solid rgba(249,115,22,0.25);box-shadow:0 0 40px rgba(249,115,22,0.1);text-decoration:none;cursor:pointer"
+               onmouseover="this.querySelector('.play-overlay').style.background='rgba(0,0,0,0.55)';this.querySelector('.play-btn').style.transform='scale(1.12)'"
+               onmouseout="this.querySelector('.play-overlay').style.background='rgba(0,0,0,0.38)';this.querySelector('.play-btn').style.transform='scale(1)'">
+                <div style="position:relative;padding-bottom:56.25%;height:0;background:#0d0d27">
+                    <img src="https://img.youtube.com/vi/Td9xu1eKD_A/maxresdefault.jpg"
+                         alt="Mari Saheba thumbnail"
+                         style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover"
+                         onerror="this.src='https://img.youtube.com/vi/Td9xu1eKD_A/hqdefault.jpg'">
+                    <div class="play-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,0.38);display:flex;align-items:center;justify-content:center;transition:background 0.3s">
+                        <div class="play-btn" style="width:72px;height:72px;background:#ff0000;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform 0.3s;box-shadow:0 0 30px rgba(255,0,0,0.5)">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div style="background:#111132;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.8rem">
+                    <div>
+                        <div style="font-size:0.72rem;color:#fb923c;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem">Original Song</div>
+                        <div style="font-size:0.9rem;color:#e2e8f0;font-weight:600">Mari Saheba — मेरी साहिबा</div>
+                    </div>
+                    <div style="display:inline-flex;align-items:center;gap:0.5rem;background:#ff0000;color:#fff;padding:0.5rem 1.1rem;border-radius:8px;font-size:0.82rem;font-weight:700">
+                        ▶ Watch on YouTube
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">Academic Background</div>
+            <h2 class="section-title">Education</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="edu-timeline">
+            <div class="edu-item fade-in">
+                <div class="edu-dot">🎓</div>
+                <div class="edu-content">
+                    <div class="edu-degree">MCA — Master of Computer Applications</div>
+                    <div class="edu-uni">Rajasthan Technical University · Apex Institute of Mgmt. &amp; Science</div>
+                    <div class="edu-meta">
+                        <span class="edu-year">2021 – 2023</span>
+                        <span class="edu-score">SGPA 8.97 / 10</span>
+                    </div>
+                </div>
+            </div>
+            <div class="edu-item fade-in">
+                <div class="edu-dot">📚</div>
+                <div class="edu-content">
+                    <div class="edu-degree">BCA — Bachelor of Computer Applications</div>
+                    <div class="edu-uni">University of Rajasthan · Commerce College, Jaipur</div>
+                    <div class="edu-meta">
+                        <span class="edu-year">2018 – 2020</span>
+                        <span class="edu-score">65.90%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="edu-item fade-in">
+                <div class="edu-dot">🏫</div>
+                <div class="edu-content">
+                    <div class="edu-degree">12th — Higher Secondary (HSC)</div>
+                    <div class="edu-uni">Rajasthan Board</div>
+                    <div class="edu-meta">
+                        <span class="edu-year">2017</span>
+                        <span class="edu-score">64.40%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">Let's Connect</div>
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="contact-wrapper">
+            <div class="contact-info fade-in">
+                <h3>Open to Opportunities</h3>
+                <p>I'm actively looking for Unity Developer roles where I can bring 4+ years of game development experience to ship high-quality, scalable products. Let's talk.</p>
+                <div class="contact-links">
+                    <a href="mailto:pradeeppurigoswami7@gmail.com" class="contact-link">
+                        <span class="contact-link-icon">📧</span>
+                        <div><div class="cl-label">Email</div><div class="cl-value">pradeeppurigoswami7@gmail.com</div></div>
+                    </a>
+                    <a href="tel:+918619578946" class="contact-link">
+                        <span class="contact-link-icon">📞</span>
+                        <div><div class="cl-label">Phone</div><div class="cl-value">+91 8619578946</div></div>
+                    </a>
+                    <div class="contact-link" style="cursor:default">
+                        <span class="contact-link-icon">📍</span>
+                        <div><div class="cl-label">Location</div><div class="cl-value">Jaipur, Rajasthan, India</div></div>
+                    </div>
+                </div>
+                <div class="social-row">
+                    <a href="https://linkedin.com/in/pradeep-puri-goswami-1630a715b" target="_blank" class="social-btn">🔗 LinkedIn</a>
+                    <a href="https://github.com/purisahib" target="_blank" class="social-btn">⌨️ GitHub</a>
+                    <a href="https://www.youtube.com/@PuriJii_0" target="_blank" class="social-btn" style="color:#ff4444;border-color:rgba(255,68,68,0.3)">▶ YouTube</a>
+                    <a href="https://x.com/pradeeppurigos1" target="_blank" class="social-btn">✖ X / Twitter</a>
+                    <a href="https://pocketfm.com/show/the-king-maker/8db4c9f53c0cbf186de45751a84b1ab0bad9fca9" target="_blank" class="social-btn" style="color:#a78bfa;border-color:rgba(139,92,246,0.3)">🎙️ Pocket FM</a>
+                    <a href="https://suno.com/@purijii" target="_blank" class="social-btn" style="color:#fb923c;border-color:rgba(249,115,22,0.3)">🎵 Suno</a>
+                    <a href="Pradeep_Puri_Goswami_CV.pdf" download class="social-btn">📄 Resume</a>
+                </div>
+            </div>
+            <div class="contact-form-box fade-in">
+                <h3>Send a Message</h3>
+                <form id="contact-form">
+                    <div class="form-field"><input type="text" placeholder="Your Name" required></div>
+                    <div class="form-field"><input type="email" placeholder="Your Email" required></div>
+                    <div class="form-field"><input type="text" placeholder="Subject"></div>
+                    <div class="form-field"><textarea rows="5" placeholder="Your Message" required></textarea></div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center" id="submit-btn">Send Message ✉️</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p style="font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:700;color:var(--cyan);margin-bottom:0.4rem">PRADEEP PURI GOSWAMI</p>
+    <p>Unity Game Developer &amp; Writer &bull; Jaipur, India</p>
+    <div style="display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;margin:1rem 0">
+        <a href="https://linkedin.com/in/pradeep-puri-goswami-1630a715b" target="_blank" style="color:var(--muted);text-decoration:none;font-size:0.82rem;transition:color 0.2s" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#94a3b8'">LinkedIn</a>
+        <a href="https://github.com/purisahib" target="_blank" style="color:var(--muted);text-decoration:none;font-size:0.82rem;transition:color 0.2s" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#94a3b8'">GitHub</a>
+        <a href="https://www.youtube.com/@PuriJii_0" target="_blank" style="color:var(--muted);text-decoration:none;font-size:0.82rem;transition:color 0.2s" onmouseover="this.style.color='#ff4444'" onmouseout="this.style.color='#94a3b8'">YouTube</a>
+        <a href="https://x.com/pradeeppurigos1" target="_blank" style="color:var(--muted);text-decoration:none;font-size:0.82rem;transition:color 0.2s" onmouseover="this.style.color='#00d4ff'" onmouseout="this.style.color='#94a3b8'">X / Twitter</a>
+        <a href="https://pocketfm.com/show/the-king-maker/8db4c9f53c0cbf186de45751a84b1ab0bad9fca9" target="_blank" style="color:var(--muted);text-decoration:none;font-size:0.82rem;transition:color 0.2s" onmouseover="this.style.color='#a78bfa'" onmouseout="this.style.color='#94a3b8'">Pocket FM</a>
+        <a href="https://suno.com/@purijii" target="_blank" style="color:var(--muted);text-decoration:none;font-size:0.82rem;transition:color 0.2s" onmouseover="this.style.color='#fb923c'" onmouseout="this.style.color='#94a3b8'">Suno</a>
+    </div>
+    <p style="font-size:0.76rem;opacity:0.45">Built with passion &amp; code &bull; 2025</p>
+</footer>
+
+<script>
+// NAV MOBILE
+function toggleNav() {
+    document.getElementById('nav-links').classList.toggle('open');
+}
+function closeNav() {
+    document.getElementById('nav-links').classList.remove('open');
+}
+
+// PARTICLES
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+class Particle {
+    constructor() { this.reset(); }
+    reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.35;
+        this.vy = (Math.random() - 0.5) * 0.35;
+        this.r = Math.random() * 1.5 + 0.4;
+        this.alpha = Math.random() * 0.45 + 0.1;
+    }
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+    }
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0,212,255,${this.alpha})`;
+        ctx.fill();
+    }
+}
+
+function initParticles() {
+    particles = [];
+    const count = Math.min(Math.floor((canvas.width * canvas.height) / 9000), 120);
+    for (let i = 0; i < count; i++) particles.push(new Particle());
+}
+
+function drawLines() {
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 110) {
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = `rgba(0,212,255,${0.07 * (1 - d / 110)})`;
+                ctx.lineWidth = 0.5;
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+    drawLines();
+    requestAnimationFrame(animate);
+}
+
+window.addEventListener('resize', () => { resize(); initParticles(); });
+resize(); initParticles(); animate();
+
+// TYPEWRITER
+const phrases = [
+    'Building Real-Time Multiplayer Games',
+    'Unity 3D Expert · 4+ Years',
+    'Shipped 12+ Commercial Titles',
+    'AR / VR · Mobile · Web · Desktop',
+    'Storyteller. Developer. Creator.',
+];
+let pi = 0, ci = 0, del = false;
+const typer = document.getElementById('typewriter');
+
+function type() {
+    const cur = phrases[pi];
+    if (del) {
+        typer.textContent = cur.substring(0, ci--);
+        if (ci < 0) { del = false; pi = (pi + 1) % phrases.length; ci = 0; setTimeout(type, 500); return; }
+    } else {
+        typer.textContent = cur.substring(0, ci++);
+        if (ci > cur.length) { del = true; setTimeout(type, 1800); return; }
+    }
+    setTimeout(type, del ? 38 : 62);
+}
+setTimeout(type, 1000);
+
+// SCROLL FADE — play animation when element enters viewport
+try {
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.classList.add('animated');
+                obs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+} catch(e) {}
+
+// CONTACT FORM
+document.getElementById('contact-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Sent! ✓';
+    btn.style.background = '#10b981';
+    btn.disabled = true;
+    setTimeout(() => { btn.textContent = 'Send Message ✉️'; btn.style.background = ''; btn.disabled = false; }, 3000);
+});
+</script>
+</body>
+</html>
