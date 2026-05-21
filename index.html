@@ -611,37 +611,65 @@
             </div>
         </div>
 
-        <!-- FEATURED SONG -->
+        <!-- FEATURED SONGS -->
         <div class="fade-in" style="margin-top:3rem">
-            <div style="text-align:center;margin-bottom:1.5rem">
-                <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#fb923c">Featured Song</span>
-                <h3 style="font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:700;color:#f1f5f9;margin-top:0.5rem">Mari Saheba &nbsp;<span style="font-weight:400;color:#94a3b8;font-family:'Inter',sans-serif;font-size:1rem">मेरी साहिबा</span></h3>
+            <div style="text-align:center;margin-bottom:2rem">
+                <span style="font-size:0.75rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#fb923c">Featured Songs</span>
+                <h3 style="font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:700;color:#f1f5f9;margin-top:0.5rem">Original Compositions</h3>
             </div>
-            <a href="https://www.youtube.com/watch?v=Td9xu1eKD_A" target="_blank"
-               style="display:block;max-width:760px;margin:0 auto;border-radius:16px;overflow:hidden;border:1px solid rgba(249,115,22,0.25);box-shadow:0 0 40px rgba(249,115,22,0.1);text-decoration:none;cursor:pointer"
-               onmouseover="this.querySelector('.play-overlay').style.background='rgba(0,0,0,0.55)';this.querySelector('.play-btn').style.transform='scale(1.12)'"
-               onmouseout="this.querySelector('.play-overlay').style.background='rgba(0,0,0,0.38)';this.querySelector('.play-btn').style.transform='scale(1)'">
-                <div style="position:relative;padding-bottom:56.25%;height:0;background:#0d0d27">
-                    <img src="https://img.youtube.com/vi/Td9xu1eKD_A/maxresdefault.jpg"
-                         alt="Mari Saheba thumbnail"
-                         style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover"
-                         onerror="this.src='https://img.youtube.com/vi/Td9xu1eKD_A/hqdefault.jpg'">
-                    <div class="play-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,0.38);display:flex;align-items:center;justify-content:center;transition:background 0.3s">
-                        <div class="play-btn" style="width:72px;height:72px;background:#ff0000;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform 0.3s;box-shadow:0 0 30px rgba(255,0,0,0.5)">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;max-width:900px;margin:0 auto">
+
+                <!-- Song 1: Mari Saheba -->
+                <a href="https://www.youtube.com/watch?v=Td9xu1eKD_A" target="_blank"
+                   style="display:block;border-radius:16px;overflow:hidden;border:1px solid rgba(249,115,22,0.25);box-shadow:0 0 30px rgba(249,115,22,0.08);text-decoration:none;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s"
+                   onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(249,115,22,0.2)';this.querySelector('.po').style.background='rgba(0,0,0,0.55)';this.querySelector('.pb').style.transform='scale(1.12)'"
+                   onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 0 30px rgba(249,115,22,0.08)';this.querySelector('.po').style.background='rgba(0,0,0,0.38)';this.querySelector('.pb').style.transform='scale(1)'">
+                    <div style="position:relative;padding-bottom:56.25%;height:0;background:#0d0d27">
+                        <img src="https://img.youtube.com/vi/Td9xu1eKD_A/maxresdefault.jpg"
+                             alt="Mari Saheba"
+                             style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover"
+                             onerror="this.src='https://img.youtube.com/vi/Td9xu1eKD_A/hqdefault.jpg'">
+                        <div class="po" style="position:absolute;inset:0;background:rgba(0,0,0,0.38);display:flex;align-items:center;justify-content:center;transition:background 0.3s">
+                            <div class="pb" style="width:60px;height:60px;background:#ff0000;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform 0.3s;box-shadow:0 0 25px rgba(255,0,0,0.6)">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div style="background:#111132;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.8rem">
-                    <div>
-                        <div style="font-size:0.72rem;color:#fb923c;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem">Original Song</div>
-                        <div style="font-size:0.9rem;color:#e2e8f0;font-weight:600">Mari Saheba — मेरी साहिबा</div>
+                    <div style="background:#111132;padding:0.9rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:0.8rem">
+                        <div>
+                            <div style="font-size:0.68rem;color:#fb923c;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem">Original Song</div>
+                            <div style="font-size:0.88rem;color:#e2e8f0;font-weight:600">Mari Saheba — मेरी साहिबा</div>
+                        </div>
+                        <div style="background:#ff0000;color:#fff;padding:0.4rem 0.9rem;border-radius:7px;font-size:0.78rem;font-weight:700;white-space:nowrap">▶ YouTube</div>
                     </div>
-                    <div style="display:inline-flex;align-items:center;gap:0.5rem;background:#ff0000;color:#fff;padding:0.5rem 1.1rem;border-radius:8px;font-size:0.82rem;font-weight:700">
-                        ▶ Watch on YouTube
+                </a>
+
+                <!-- Song 2: Tumhari Sahiba -->
+                <a href="https://www.youtube.com/watch?v=jk8o7Z1CaCU" target="_blank"
+                   style="display:block;border-radius:16px;overflow:hidden;border:1px solid rgba(139,92,246,0.25);box-shadow:0 0 30px rgba(139,92,246,0.08);text-decoration:none;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s"
+                   onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(139,92,246,0.2)';this.querySelector('.po2').style.background='rgba(0,0,0,0.55)';this.querySelector('.pb2').style.transform='scale(1.12)'"
+                   onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 0 30px rgba(139,92,246,0.08)';this.querySelector('.po2').style.background='rgba(0,0,0,0.38)';this.querySelector('.pb2').style.transform='scale(1)'">
+                    <div style="position:relative;padding-bottom:56.25%;height:0;background:#0d0d27">
+                        <img src="https://img.youtube.com/vi/jk8o7Z1CaCU/maxresdefault.jpg"
+                             alt="Tumhari Sahiba"
+                             style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover"
+                             onerror="this.src='https://img.youtube.com/vi/jk8o7Z1CaCU/hqdefault.jpg'">
+                        <div class="po2" style="position:absolute;inset:0;background:rgba(0,0,0,0.38);display:flex;align-items:center;justify-content:center;transition:background 0.3s">
+                            <div class="pb2" style="width:60px;height:60px;background:#ff0000;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform 0.3s;box-shadow:0 0 25px rgba(255,0,0,0.6)">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </a>
+                    <div style="background:#111132;padding:0.9rem 1.2rem;display:flex;align-items:center;justify-content:space-between;gap:0.8rem">
+                        <div>
+                            <div style="font-size:0.68rem;color:#a78bfa;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.2rem">Original Song</div>
+                            <div style="font-size:0.88rem;color:#e2e8f0;font-weight:600">Tumhari Sahiba — तुम्हारी साहिबा</div>
+                        </div>
+                        <div style="background:#ff0000;color:#fff;padding:0.4rem 0.9rem;border-radius:7px;font-size:0.78rem;font-weight:700;white-space:nowrap">▶ YouTube</div>
+                    </div>
+                </a>
+
+            </div>
         </div>
 
     </div>
