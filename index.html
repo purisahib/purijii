@@ -3,7 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pradeep Puri Goswami — Game Developer & Writer</title>
+    <title>Pradeep Puri Goswami — Unity Game Developer & Writer | Jaipur</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Pradeep Puri Goswami — Unity 3D/2D Game Developer with 4+ years experience. Shipped 12+ games on Android, iOS, Web & AR/VR. Also a writer & song creator from Jaipur, India.">
+    <meta name="keywords" content="Unity Developer, Game Developer, Unity 3D, C#, Multiplayer, Photon, Socket.IO, Android, iOS, AR VR, Jaipur, India, Pradeep Puri Goswami">
+    <meta name="author" content="Pradeep Puri Goswami">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph (WhatsApp, LinkedIn, Facebook preview) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://purisahib.github.io/purijii/">
+    <meta property="og:title" content="Pradeep Puri Goswami — Game Developer & Writer">
+    <meta property="og:description" content="Unity 3D/2D Game Developer · 4+ years · 12+ games shipped · Writer · Song Creator · Jaipur, India">
+    <meta property="og:image" content="https://purisahib.github.io/purijii/images/logo.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@pradeeppurigos1">
+    <meta name="twitter:title" content="Pradeep Puri Goswami — Game Developer & Writer">
+    <meta name="twitter:description" content="Unity 3D/2D Game Developer · 4+ years · 12+ games shipped · Writer · Song Creator">
+    <meta name="twitter:image" content="https://purisahib.github.io/purijii/images/logo.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -212,6 +237,60 @@
         /* FOOTER */
         footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 2rem; text-align: center; color: var(--muted); font-size: 0.85rem; }
 
+        /* PRELOADER */
+        #preloader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: var(--bg);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        #preloader.hidden { opacity: 0; visibility: hidden; }
+        .preloader-logo { width: 80px; height: 80px; border-radius: 50%; object-fit: contain; margin-bottom: 1.5rem; animation: pulse 1.2s ease-in-out infinite; }
+        .preloader-bar { width: 200px; height: 3px; background: rgba(255,45,158,0.15); border-radius: 3px; overflow: hidden; }
+        .preloader-fill { height: 100%; background: linear-gradient(90deg, #ff2d9e, #3d5cff); border-radius: 3px; animation: load 1.8s ease forwards; }
+        @keyframes load { from { width: 0; } to { width: 100%; } }
+        @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,45,158,0.4); } 50% { box-shadow: 0 0 0 16px rgba(255,45,158,0); } }
+
+        /* BACK TO TOP */
+        #back-top {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 500;
+            width: 46px; height: 46px; border-radius: 50%;
+            background: linear-gradient(135deg, #ff2d9e, #3d5cff);
+            border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(255,45,158,0.4);
+        }
+        #back-top.show { opacity: 1; visibility: visible; }
+        #back-top:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255,45,158,0.5); }
+
+        /* WHATSAPP BUTTON */
+        #whatsapp-btn {
+            position: fixed; bottom: 5.5rem; right: 2rem; z-index: 500;
+            width: 46px; height: 46px; border-radius: 50%;
+            background: #25d366; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+            transition: all 0.3s;
+        }
+        #whatsapp-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(37,211,102,0.6); }
+
+        /* COUNTER */
+        .stat-number { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; font-weight: 900; color: var(--cyan); line-height: 1; margin-bottom: 0.5rem; }
+
+        /* TESTIMONIALS */
+        #testimonials { background: var(--bg2); }
+        .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .testi-card {
+            background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+            padding: 1.8rem; position: relative; transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .testi-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px var(--glow); }
+        .testi-quote { font-size: 3rem; color: var(--cyan); line-height: 1; margin-bottom: 0.5rem; opacity: 0.4; }
+        .testi-text { font-size: 0.92rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.2rem; font-style: italic; }
+        .testi-author { display: flex; align-items: center; gap: 0.8rem; }
+        .testi-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #ff2d9e, #3d5cff); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+        .testi-name { font-size: 0.88rem; color: var(--text); font-weight: 600; }
+        .testi-role { font-size: 0.76rem; color: var(--muted); }
+
         /* ANIMATIONS — content always visible; animation plays when JS adds .animated class */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(24px); }
@@ -234,6 +313,22 @@
 </head>
 <body>
 
+<!-- PRELOADER -->
+<div id="preloader">
+    <img src="images/logo.png" alt="Loading" class="preloader-logo" onerror="this.style.display='none'">
+    <div class="preloader-bar"><div class="preloader-fill"></div></div>
+</div>
+
+<!-- WHATSAPP FLOATING -->
+<a id="whatsapp-btn" href="https://wa.me/918619578946?text=Hi%20Pradeep!%20I%20saw%20your%20portfolio." target="_blank" title="Chat on WhatsApp">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- BACK TO TOP -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M7 14l5-5 5 5z"/></svg>
+</button>
+
 <!-- NAV -->
 <nav>
     <a href="#hero" class="nav-logo">
@@ -245,6 +340,7 @@
         <li><a href="#skills" onclick="closeNav()">Skills</a></li>
         <li><a href="#projects" onclick="closeNav()">Projects</a></li>
         <li><a href="#writing" onclick="closeNav()">Writing</a></li>
+        <li><a href="#testimonials" onclick="closeNav()">Reviews</a></li>
         <li><a href="#contact" onclick="closeNav()">Contact</a></li>
     </ul>
     <button class="nav-toggle" id="nav-toggle" onclick="toggleNav()">☰</button>
@@ -289,19 +385,19 @@
             </div>
             <div class="about-stats fade-in">
                 <div class="stat-card">
-                    <div class="stat-number">4+</div>
+                    <div class="stat-number" data-target="4" data-suffix="+">0</div>
                     <div class="stat-label">Years Experience</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">12+</div>
+                    <div class="stat-number" data-target="12" data-suffix="+">0</div>
                     <div class="stat-label">Games Shipped</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">5</div>
+                    <div class="stat-number" data-target="5" data-suffix="">0</div>
                     <div class="stat-label">Platforms Deployed</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">8.97</div>
+                    <div class="stat-number" data-target="8.97" data-suffix="">0</div>
                     <div class="stat-label">MCA SGPA / 10</div>
                 </div>
             </div>
@@ -726,6 +822,52 @@
     </div>
 </section>
 
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+    <div class="container">
+        <div class="section-header">
+            <div class="section-tag">What People Say</div>
+            <h2 class="section-title">Testimonials</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="testi-grid">
+            <div class="testi-card fade-in">
+                <div class="testi-quote">"</div>
+                <p class="testi-text">Pradeep is one of the most dedicated Unity developers I've worked with. His ability to ship real-time multiplayer games on tight deadlines while maintaining quality is exceptional.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">👨‍💼</div>
+                    <div>
+                        <div class="testi-name">Team Lead — KPIS Pvt. Ltd.</div>
+                        <div class="testi-role">Game Development Manager, Jaipur</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card fade-in">
+                <div class="testi-quote">"</div>
+                <p class="testi-text">The multiplayer architecture Pradeep built for our Ludo platform handles thousands of concurrent users flawlessly. His Socket.IO integration is rock solid.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">🚀</div>
+                    <div>
+                        <div class="testi-name">Product Owner — Try Players</div>
+                        <div class="testi-role">Real-Money Gaming Platform</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card fade-in">
+                <div class="testi-quote">"</div>
+                <p class="testi-text">Not just a developer — Pradeep thinks like a game designer. He brings storytelling instincts to his code, which makes the games he builds genuinely engaging.</p>
+                <div class="testi-author">
+                    <div class="testi-avatar">🎮</div>
+                    <div>
+                        <div class="testi-name">Senior Developer — KPIS</div>
+                        <div class="testi-role">Cross-Platform Games Team</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- EDUCATION -->
 <section id="education">
     <div class="container">
@@ -856,6 +998,50 @@
 </footer>
 
 <script>
+// PRELOADER
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.getElementById('preloader').classList.add('hidden');
+    }, 1800);
+});
+
+// BACK TO TOP
+window.addEventListener('scroll', () => {
+    const btn = document.getElementById('back-top');
+    if (window.scrollY > 400) btn.classList.add('show');
+    else btn.classList.remove('show');
+});
+
+// COUNTER ANIMATION
+function animateCounter(el) {
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const isDecimal = target % 1 !== 0;
+    const duration = 1800;
+    const steps = 60;
+    const increment = target / steps;
+    let current = 0;
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            current = target;
+            clearInterval(timer);
+        }
+        el.textContent = isDecimal ? current.toFixed(2) + suffix : Math.floor(current) + suffix;
+    }, duration / steps);
+}
+
+const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting && !e.target.classList.contains('counted')) {
+            e.target.classList.add('counted');
+            animateCounter(e.target);
+            counterObs.unobserve(e.target);
+        }
+    });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stat-number[data-target]').forEach(el => counterObs.observe(el));
+
 // NAV MOBILE
 function toggleNav() {
     document.getElementById('nav-links').classList.toggle('open');
