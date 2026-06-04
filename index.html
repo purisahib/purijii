@@ -386,6 +386,7 @@
                         <span class="badge badge-live">Live</span>
                         <span class="badge badge-3d">3D</span>
                         <span class="badge badge-multi">Multiplayer</span>
+                        <span class="badge badge-store">Play Store</span>
                     </div>
                     <div class="project-title">Unique Teen Patti</div>
                 </div>
@@ -412,7 +413,7 @@
                     </div>
                 </div>
                 <div class="project-footer">
-                    <span class="project-link muted">▶ Demo on Drive</span>
+                    <a href="https://play.google.com/store/apps/details?id=com.unique.teenpatti" target="_blank" class="project-link">↗ Google Play</a>
                 </div>
             </div>
 
@@ -759,12 +760,30 @@
             </div>
             <div class="contact-form-box fade-in">
                 <h3>Send a Message</h3>
-                <form id="contact-form">
-                    <div class="form-field"><input type="text" placeholder="Your Name" required></div>
-                    <div class="form-field"><input type="email" placeholder="Your Email" required></div>
-                    <div class="form-field"><input type="text" placeholder="Subject"></div>
-                    <div class="form-field"><textarea rows="5" placeholder="Your Message" required></textarea></div>
-                    <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center" id="submit-btn">Send Message ✉️</button>
+                <form id="contact-form"
+                      action="https://formsubmit.co/pradeeppurigoswami7@gmail.com"
+                      method="POST">
+                    <!-- Formsubmit settings -->
+                    <input type="hidden" name="_subject" value="Portfolio Contact — New Message">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_next" value="about:blank">
+                    <input type="hidden" name="_template" value="table">
+
+                    <div class="form-field">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="text" name="subject" placeholder="Subject">
+                    </div>
+                    <div class="form-field">
+                        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center" id="submit-btn">
+                        Send Message ✉️
+                    </button>
                 </form>
             </div>
         </div>
@@ -899,14 +918,12 @@ try {
     document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 } catch(e) {}
 
-// CONTACT FORM
-document.getElementById('contact-form').addEventListener('submit', e => {
-    e.preventDefault();
+// CONTACT FORM — submit button loading state
+document.getElementById('contact-form').addEventListener('submit', function() {
     const btn = document.getElementById('submit-btn');
-    btn.textContent = 'Sent! ✓';
-    btn.style.background = '#10b981';
+    btn.textContent = 'Sending...';
     btn.disabled = true;
-    setTimeout(() => { btn.textContent = 'Send Message ✉️'; btn.style.background = ''; btn.disabled = false; }, 3000);
+    btn.style.opacity = '0.8';
 });
 </script>
 </body>
